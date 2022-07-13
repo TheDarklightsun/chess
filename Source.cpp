@@ -20,7 +20,8 @@ struct s_coord
     }
     friend std::ostream& operator<<(std::ostream& os, const s_coord& f)
     {
-        os << f.x_letter << ":" << f.y_number;
+        char a = 'a' + f.x_letter;
+        os << a <<":"<< f.y_number;
         return os;
     }
 };
@@ -46,7 +47,7 @@ public:
     virtual bool Turn(const s_coord new_coord) = 0;
     friend std::ostream& operator<<(std::ostream& os, const Figure& f)
     {
-        os << "coord: " << f.m_coord << ",color: " << f.m_color << std::endl;
+        os << "coord: " << f.m_coord << " , color: " << (f.m_color ? "white" : "black") << std::endl;
         return os;
     }
 };
@@ -119,29 +120,60 @@ public:
 int main()
 {
     Figure* pf;
-    s_coord te = { e,5 };
-    s_coord th = { h,8 };
+    s_coord tc1 = { c,1 };
+    s_coord tc2 = { c,8 };
+    s_coord tf1 = { f,1 };
+    s_coord tf2 = { f,8 };
+    s_coord td1 = { d,1 };
+    s_coord td2 = { d,8 };
+    s_coord ta1 = { a,1 };
+    s_coord ta2 = { a,8 };
+    s_coord th1 = { h,1 };
+    s_coord th2 = { h,8 };
 
-    pf = new Queen(te, white);
-    std::cout << *pf;
-    pf->Turn(th);
+    std::cout << "Queen" << std::endl;
+    std::cout << "-----" << std::endl;
+
+    pf = new Queen(td1, white);
+    std::cout << *pf;;
+    pf = new Queen(td2, black);
     std::cout << *pf;
     delete pf;
     std::cout << std::endl;
 
-    pf = new Bishop(th, black);
+    std::cout << "Bishop" << std::endl;
+    std::cout << "------" << std::endl;
+
+    pf = new Bishop(tc1, white);
     std::cout << *pf;
-    pf->Turn(te);
+    pf = new Bishop(tf1, white);
     std::cout << *pf;
     delete pf;
     std::cout << std::endl;
 
-    pf = new Castle(te, black);
+    pf = new Bishop(tc2, black);
     std::cout << *pf;
-    pf->Turn(th);
+    pf = new Bishop(tf2, black);
     std::cout << *pf;
     delete pf;
     std::cout << std::endl;
-    std::cin.get();
+
+    std::cout << "Castle" << std::endl;
+    std::cout << "------" << std::endl;
+
+    pf = new Castle(ta1, white);
+    std::cout << *pf;
+    pf = new Castle(th2, white);
+    std::cout << *pf;
+    delete pf;
+    std::cout << std::endl;
+
+    pf = new Castle(ta2, black);
+    std::cout << *pf;
+    pf = new Castle(th2, black);
+    std::cout << *pf;
+    delete pf;
+    std::cout << std::endl;
+
     return 0;
 }
