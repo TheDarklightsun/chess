@@ -163,7 +163,7 @@ int main()
 
     pf = new Castle(ta1, white);
     std::cout << *pf;
-    pf = new Castle(th2, white);
+    pf = new Castle(th1, white);
     std::cout << *pf;
     delete pf;
     std::cout << std::endl;
